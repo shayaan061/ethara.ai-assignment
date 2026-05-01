@@ -37,7 +37,10 @@ def update_project(request, pk):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def list_projects(request):
-    projects = Project.objects.all()
+    if request.user.role == "ADMIN":
+        projects = Project.objects.all()
+    else:
+        projects = Project.objects.all()  # TEMP for demo
     data = [
         {
             "id": p.id,

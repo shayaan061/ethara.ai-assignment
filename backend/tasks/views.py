@@ -46,7 +46,7 @@ def update_task(request, pk):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def dashboard(request):
-    tasks = Task.objects.select_related('project', 'assigned_to').all()
+    tasks = Task.objects.all()   # TEMP for demo
 
     total = tasks.count()
     completed = tasks.filter(status="DONE").count()
