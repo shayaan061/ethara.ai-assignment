@@ -1,1 +1,1 @@
-web: cd backend && python manage.py migrate && gunicorn config.wsgi --bind 0.0.0.0:$PORT
+web: cd backend && python manage.py migrate && python manage.py shell -c "from django.contrib.auth import get_user_model; User=get_user_model(); User.objects.filter(username='admin').exists() or User.objects.create_superuser('admin','admin@test.com','admin123')" && gunicorn config.wsgi --bind 0.0.0.0:$PORT
