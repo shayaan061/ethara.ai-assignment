@@ -122,6 +122,10 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://etharaai-assignment-production.up.railway.app"
+]
+
 
 # =====================
 # STATIC FILES (IMPORTANT FOR RAILWAY)
