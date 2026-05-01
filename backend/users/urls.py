@@ -5,5 +5,4 @@ urlpatterns = [
     path('register', register),
     path('login', login),
     path('users', list_users),
-    path('init-admin', init_admin),  # ✅ IMPORTANT
 ]

@@ -67,21 +67,3 @@ def list_users(request):
     ]
 
     return Response(data)
-
-
-# ✅ AUTO CREATE ADMIN (SAFE VERSION)
-@api_view(['GET'])
-def init_admin(request):
-    """
-    Call this ONCE from browser:
-    /api/init-admin
-    """
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser(
-            username="admin",
-            email="admin@test.com",
-            password="admin123"
-        )
-        return Response({"message": "Admin created"})
-
-    return Response({"message": "Admin already exists"})
