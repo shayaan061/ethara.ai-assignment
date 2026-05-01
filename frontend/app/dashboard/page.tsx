@@ -1,5 +1,7 @@
 "use client";
 
+const API = "https://etharaai-assignment-production.up.railway.app";
+
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -16,7 +18,7 @@ export default function Dashboard() {
     const createProject = async () => {
         if (!projectTitle.trim() || !token) return;
 
-        const res = await fetch("process.env.NEXT_PUBLIC_API_URL/api/projects", {
+        const res = await fetch(`${API}/api/projects`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -37,7 +39,7 @@ export default function Dashboard() {
     };
 
     const updateTask = async (id: number, updates: any) => {
-        const res = await fetch(`process.env.NEXT_PUBLIC_API_URL/api/tasks/${id}`, {
+        const res = await fetch(`${API}/api/tasks/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -49,7 +51,7 @@ export default function Dashboard() {
     };
 
     const updateProject = async (id: number, title: string) => {
-        const res = await fetch(`process.env.NEXT_PUBLIC_API_URL/api/projects/${id}`, {
+        const res = await fetch(`${API}/api/projects/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -63,7 +65,7 @@ export default function Dashboard() {
     useEffect(() => {
         if (!token) return;
 
-        fetch("process.env.NEXT_PUBLIC_API_URL/api/dashboard", {
+        fetch(`${API}/api/dashboard`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

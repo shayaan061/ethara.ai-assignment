@@ -1,5 +1,7 @@
 "use client";
 
+const API = "https://etharaai-assignment-production.up.railway.app";
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -11,7 +13,7 @@ export default function Register() {
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
-        const res = await fetch("process.env.NEXT_PUBLIC_API_URL/api/register", {
+        const res = await fetch(`${API}/api/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

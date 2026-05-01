@@ -1,5 +1,7 @@
 "use client";
 
+const API = "https://etharaai-assignment-production.up.railway.app";
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -18,7 +20,7 @@ export default function Tasks() {
         if (!token) return;
 
         // fetch projects
-        fetch("process.env.NEXT_PUBLIC_API_URL/api/projects/list", {
+        fetch(`${API}/api/projects/list`, {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then(res => res.json())
@@ -26,15 +28,16 @@ export default function Tasks() {
                 if (Array.isArray(data)) setProjects(data);
             });
 
-        // fetch users
-        fetch("process.env.NEXT_PUBLIC_API_URL/api/users/list", {
-            headers: { Authorization: `Bearer ${token}` },
-        })
+    }, [token]);
+
+    useEffect(() => {
+        fetch("https://etharaai-assignment-production.up.railway.app/api/users")
             .then(res => res.json())
             .then(data => {
-                if (Array.isArray(data)) setUsers(data);
+                console.log("USERS:", data);
+                setUsers(data);
             });
-    }, [token]);
+    }, []);
 
     const createTask = async (e: any) => {
         e.preventDefault();
@@ -44,7 +47,7 @@ export default function Tasks() {
             return;
         }
 
-        const res = await fetch("process.env.NEXT_PUBLIC_API_URL/api/tasks", {
+        const res = await fetch(`${API}/api/tasks`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
