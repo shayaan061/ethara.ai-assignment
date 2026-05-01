@@ -2,6 +2,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import Task
+from projects.models import Project
 from datetime import date
 
 
@@ -19,6 +20,27 @@ def create_task(request):
         return Response({"message": "Task created"})
     except Exception as e:
         return Response({"error": str(e)}, status=400)
+
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def update_task(request, pk):
+    try:
+        task = Task.objects.get(id=pk)
+        user = request.user
+
+        # ✅ Permission check
+        if user.role != "ADMIN" and task.assigned_to != user:
+            return Response({"error": "Not allowed"}, status=403)
+
+        # ✅ Only allow status change
+        task.status = request.data.get('status', task.status)
+        task.save()
+
+        return Response({"message": "Task updated"})
+
+    except Task.DoesNotExist:
+        return Response({"error": "Not found"}, status=404)
 
 
 @api_view(['GET'])
@@ -42,9 +64,18 @@ def dashboard(request):
         for task in tasks
     ]
 
+    project_list = [
+        {
+            "id": project.id,
+            "title": project.title
+        }
+        for project in Project.objects.all()
+    ]
+
     return Response({
         "total": total,
         "completed": completed,
         "overdue": overdue,
-        "tasks": task_list
+        "tasks": task_list,
+        "projects": project_list
     })

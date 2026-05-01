@@ -1,4 +1,5 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -27,3 +28,17 @@ def login(request):
         })
 
     return Response({"error": "Invalid credentials"}, status=400)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def list_users(request):
+    users = User.objects.all()
+    data = [
+        {
+            "id": u.id,
+            "username": u.username
+        }
+        for u in users
+    ]
+    return Response(data)
