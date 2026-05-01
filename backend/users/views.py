@@ -53,17 +53,14 @@ def login(request):
 
 # ✅ LIST USERS (PROTECTED)
 @api_view(['GET'])
-@permission_classes([])   # TEMP for demo
+@permission_classes([])   # allow anyone (for demo)
 def list_users(request):
     users = User.objects.all()
-
     data = [
         {
             "id": u.id,
-            "username": u.username,
-            "role": u.role
+            "username": u.username
         }
         for u in users
     ]
-
     return Response(data)
