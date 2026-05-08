@@ -1,6 +1,6 @@
 # Ethara.Ai Recruitment Platform
 
-**Please review the demo video here: [https://drive.google.com/drive/folders/1_kD7RdPLfhu1bDfRIulXCAjn2iFAPk--?usp=drive_link](https://drive.google.com/drive/folders/1_kD7RdPLfhu1bDfRIulXCAjn2iFAPk--?usp=drive_link)**
+**Please review the demo video here:https://drive.google.com/file/d/1DqdA4eP94woMiXLm4kiZbdheaNkTYIhy/view?usp=sharing 
 
 An AI-powered recruitment platform designed to streamline the hiring process with a premium, animated user experience. The platform includes dedicated portals for applicants and companies, along with a comprehensive admin dashboard for project and task management.
 
